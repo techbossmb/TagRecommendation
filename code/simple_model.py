@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from utils import clean_text, sort_score, map_topk_words
 import os
 from nltk.corpus import wordnet
+import pickle
 
 '''
 Description: use Term-Frequency - Inverse DocumentFrequency (TFIDF) to identify important words in a text
@@ -58,21 +59,29 @@ def get_similar_words(word):
     return recommendations
     
 if __name__=='__main__':
-    tf_idf, count_vectorizer = build_tfidf_model(train_file)
+    tfidf_path = '{}{}tfidf.pk'.format(datapath, os.sep)
+    countvector_path = '{}{}countvector.pk'.format(datapath, os.sep)
+
+    # load saved (trained) model or train new model if it doesn't exist
+    if os.path.exists(tfidf_path) and os.path.exists(countvector_path):
+        print('loading saved model')
+        tf_idf = pickle.load(open(tfidf_path, 'rb'))
+        count_vectorizer = pickle.load(open(countvector_path, 'rb'))
+    else:
+        print('building tf-idf model')
+        tf_idf, count_vectorizer = build_tfidf_model(train_file)
+        pickle.dump(tf_idf, open(tfidf_path, "wb"))
+        pickle.dump(count_vectorizer, open(countvector_path, "wb"))
+
     test_data = load_jsondata(test_file)
     num_of_tags = 10
     topkwords_list = estimate_tfidf_on_testdata(count_vectorizer, tf_idf, test_data, num_of_tags)
     test_index = 0
     print('Text :{}'.format(test_data[test_index]))
-    print('Top {} words from text'.format(3))
+    print('Top {} words from text'.format(num_of_tags))
     topkwords = topkwords_list[test_index]
     # show important words in the document plus other words similar to it (recommended tags)
     for topkword in topkwords:
         print('word: {}, tf-idf score: {}, recommended tags: {}'.format(topkword, \
                                                                 topkwords[topkword], \
                                                                 get_similar_words(topkword)))
-    
-
-
-
-
