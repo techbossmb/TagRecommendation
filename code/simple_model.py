@@ -8,7 +8,7 @@ from nltk.corpus import wordnet
 import pickle
 
 '''
-Description: use Term-Frequency - Inverse DocumentFrequency (TFIDF) to identify important words in a text
+@Description: use Term-Frequency - Inverse DocumentFrequency (TFIDF) to identify important words in a text
 and suggest words simialar to the TF-IDF identified words. 
 @use-case: A tag recommendation system based on importance of words in a document
 @author: techbossmb
