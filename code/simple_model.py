@@ -31,7 +31,7 @@ def build_tfidf_model(train_file):
     count_vectorizer = CountVectorizer(max_df=0.8,stop_words='english')
     word_counts = count_vectorizer.fit_transform(train_data)
     # build tf-idf model
-    tf_idf = TfidfTransformer(smooth_idf=True, use_idf=True)
+    tf_idf = TfidfTransformer()
     tf_idf.fit(word_counts)
     return tf_idf, count_vectorizer
 
