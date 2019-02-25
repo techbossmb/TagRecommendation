@@ -8,3 +8,6 @@ List of Files
 + simple_model.py - uses TF-IDF to identify the top-k most important words in a given document and finds other words similar to the identified (important) words
 
 + utils.py - set of util functions
+
+Sample Result
+https://github.com/techbossmb/TagRecommendation/blob/master/data/TagRecommendationResult.JPG?raw=true
