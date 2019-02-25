@@ -10,4 +10,5 @@ List of Files
 + utils.py - set of util functions
 
 Sample Result
-https://github.com/techbossmb/TagRecommendation/blob/master/data/TagRecommendationResult.JPG?raw=true
+![alt text](https://github.com/techbossmb/TagRecommendation/blob/master/data/TagRecommendationResult.JPG?raw=true)
+
